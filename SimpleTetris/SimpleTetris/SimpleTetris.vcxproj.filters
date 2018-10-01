@@ -19,10 +19,12 @@
     <ClCompile Include="Window.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
+    <ClCompile Include="Renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
       <Filter>Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer.h" />
   </ItemGroup>
 </Project>
