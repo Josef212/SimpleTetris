@@ -4,6 +4,9 @@
 class Renderer;
 class Input;
 class Window;
+class Pieces;
+class Board;
+class Game;
 
 class Scene
 {
@@ -11,13 +14,19 @@ public:
 	Scene();
 	virtual ~Scene();
 
-	void Init();
+	void Init(Window* w, Renderer* r);
 	void CleanUp();
 
-	void BeginFrame();
+	void BeginFrame(Window* w, Input* i);
 	void Draw();
 
 private:
+
+	Pieces* pieces;
+	Board* board;
+	Game* game;
+
+	unsigned long time1 = 0;
 
 };
 
