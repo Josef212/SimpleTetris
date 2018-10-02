@@ -22,6 +22,8 @@ public:
 	void SetName(const char* _name) { if (_name) name = name; }
 
 	void GetSize(unsigned int& w, unsigned int& h);
+	int GetWidth() const { return width; }
+	int GetHeight()const { return height; }
 	void SetSize(unsigned int& w, unsigned int& h);
 	void SetWidth(unsigned int w);
 	void SetHeight(unsigned int h);

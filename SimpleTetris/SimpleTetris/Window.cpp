@@ -41,6 +41,12 @@ void Window::Init()
 
 		if (window) surface = SDL_GetWindowSurface(window);
 
+		if (surface)
+		{
+			width = surface->w;
+			height = surface->h;
+		}
+
 	}
 }
 

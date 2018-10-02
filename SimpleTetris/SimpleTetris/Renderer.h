@@ -5,12 +5,14 @@
 
 class Window;
 
+static SDL_Color white		= { 255, 255, 255, 255 };
+static SDL_Color black		= { 0, 0, 0, 255 };
 static SDL_Color red		= { 255, 0, 0, 255 };
 static SDL_Color green		= { 0, 255, 0, 255 };
 static SDL_Color blue		= { 0, 0, 255, 255 };
 static SDL_Color yellow		= { 255, 255, 0, 255 };
 static SDL_Color magenta	= { 255, 0, 255, 255 };
-static SDL_Color cian		= { 0, 255, 255, 255 };
+static SDL_Color cyan		= { 0, 255, 255, 255 };
 
 class Renderer
 {
@@ -24,7 +26,7 @@ public:
 	void BeginFrame();
 	void EndFrame();
 
-	void DrawRect(SDL_Rect& rect, SDL_Color& color, bool filled = true, bool useCamera = true)const;
+	void DrawRect(SDL_Rect rect, SDL_Color color, bool filled = true, bool useCamera = false)const;
 	void DrawLine(int x0, int y0, int x1, int y1, SDL_Color& color, bool useCamera = true)const;
 	void DrawCircle(int x, int y, int radius, SDL_Color& color, bool useCamera = true);
 

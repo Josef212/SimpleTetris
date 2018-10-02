@@ -43,13 +43,17 @@ void Input::BeginFrame()
 	{
 		if (keys[i] == 1)
 		{
-			if (keyboard[i] == KEY_IDLE) keyboard[i] = KEY_DOWN;
-			else keyboard[i] = KEY_REPEAT;
+			if (keyboard[i] == KEY_IDLE)
+				keyboard[i] = KEY_DOWN;
+			else
+				keyboard[i] = KEY_REPEAT;
 		}
 		else
 		{
-			if (keyboard[i] == KEY_REPEAT || keyboard[i] == KEY_DOWN) keyboard[i] = KEY_DOWN;
-			else keyboard[i] = KEY_IDLE;
+			if (keyboard[i] == KEY_REPEAT || keyboard[i] == KEY_DOWN)
+				keyboard[i] = KEY_UP;
+			else
+				keyboard[i] = KEY_IDLE;
 		}
 	}
 
@@ -98,4 +102,6 @@ void Input::BeginFrame()
 			break;
 		}
 	}
+
+	SDL_PollEvent(&e);
 }

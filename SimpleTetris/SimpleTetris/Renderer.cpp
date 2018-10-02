@@ -53,7 +53,7 @@ void Renderer::EndFrame()
 	SDL_RenderPresent(renderer);
 }
 
-void Renderer::DrawRect(SDL_Rect & rect, SDL_Color & color, bool filled, bool useCamera) const
+void Renderer::DrawRect(SDL_Rect rect, SDL_Color color, bool filled, bool useCamera) const
 {
 	unsigned int scale = window->GetScale();
 
