@@ -1,11 +1,10 @@
 #include <iostream>
 #include <SDL.h>
 
-#include <Windows.h>
-
 #include "Window.h"
 #include "Renderer.h"
 #include "Input.h"
+#include "Scene.h"
 
 // ----
 
@@ -16,24 +15,33 @@ int main(int argc, char** argv)
 	Input i;
 	Renderer r;
 
+	Scene s;
+
 	w.Init();
 	i.Init();
 	r.Init(&w);
+
+	s.Init(&w, &r);
 
 	while(!i.quitEvent)
 	{
 		i.BeginFrame();
 		r.BeginFrame();
 
+		s.BeginFrame(&w, &i);
 
-		r.DrawCircle(100, 100, 50, red);
+		s.Draw();
 
 		r.EndFrame();
 	}
 
+	s.CleanUp();
+
 	r.CleanUp();
 	i.CleanUp();
 	w.CleanUp();
+
+	system("PAUSE");
 
 	return 0;
 }

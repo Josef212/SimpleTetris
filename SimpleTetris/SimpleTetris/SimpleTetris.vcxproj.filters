@@ -8,8 +8,11 @@
     <Filter Include="Core">
       <UniqueIdentifier>{acd91b24-535d-4d79-9de1-fe2d842ccb73}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Helpers">
+    <Filter Include="Systems">
       <UniqueIdentifier>{4ceaf243-9886-4145-921b-ba810906ce4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helpers">
+      <UniqueIdentifier>{63129767-9b20-42af-a634-5f60c1589cb0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -17,23 +20,50 @@
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Window.cpp">
-      <Filter>Helpers</Filter>
+      <Filter>Systems</Filter>
     </ClCompile>
     <ClCompile Include="Input.cpp">
-      <Filter>Helpers</Filter>
+      <Filter>Systems</Filter>
     </ClCompile>
     <ClCompile Include="Renderer.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Pieces.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Board.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
-      <Filter>Helpers</Filter>
+      <Filter>Systems</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h">
-      <Filter>Helpers</Filter>
+      <Filter>Systems</Filter>
     </ClInclude>
     <ClInclude Include="Input.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Pieces.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Board.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="PiecesInfo.h">
       <Filter>Helpers</Filter>
     </ClInclude>
   </ItemGroup>
