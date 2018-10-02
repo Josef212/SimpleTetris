@@ -5,6 +5,13 @@
 
 class Window;
 
+static SDL_Color red		= { 255, 0, 0, 255 };
+static SDL_Color green		= { 0, 255, 0, 255 };
+static SDL_Color blue		= { 0, 0, 255, 255 };
+static SDL_Color yellow		= { 255, 255, 0, 255 };
+static SDL_Color magenta	= { 255, 0, 255, 255 };
+static SDL_Color cian		= { 0, 255, 255, 255 };
+
 class Renderer
 {
 public:

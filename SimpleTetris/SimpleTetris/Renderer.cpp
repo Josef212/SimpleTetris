@@ -5,7 +5,7 @@
 
 Renderer::Renderer()
 {
-	background = { 0, 0, 0, 1 };
+	background = { 0, 0, 0, 255 };
 }
 
 
