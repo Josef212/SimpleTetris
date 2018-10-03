@@ -2,6 +2,7 @@
 #define __RENDERER_H__
 
 #include <SDL.h>
+#include <climits>
 
 class Window;
 
@@ -29,6 +30,8 @@ public:
 	void DrawRect(SDL_Rect rect, SDL_Color color, bool filled = true, bool useCamera = false)const;
 	void DrawLine(int x0, int y0, int x1, int y1, SDL_Color& color, bool useCamera = true)const;
 	void DrawCircle(int x, int y, int radius, SDL_Color& color, bool useCamera = true);
+
+	void Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section = NULL, double angle = 0, int pivotX = INT_MAX, int pivotY = INT_MAX);
 
 	void SetViewport(SDL_Rect r);
 	SDL_Rect GetViewport()const { return viewport; }

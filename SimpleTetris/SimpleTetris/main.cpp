@@ -9,6 +9,7 @@
 #include "Renderer.h"
 #include "Input.h"
 #include "Scene.h"
+#include "Textures.h"
 
 // ----
 
@@ -17,15 +18,17 @@ int main(int argc, char** argv)
 
 	Window w;
 	Input i;
+	Textures t;
 	Renderer r;
 
 	Scene s;
 
 	w.Init();
 	i.Init();
+	t.Init();
 	r.Init(&w);
 
-	s.Init(&w, &r);
+	s.Init(&w, &r, &t);
 
 	while(!i.quitEvent)
 	{
@@ -42,6 +45,7 @@ int main(int argc, char** argv)
 	s.CleanUp();
 
 	r.CleanUp();
+	t.CleanUp();
 	i.CleanUp();
 	w.CleanUp();
 

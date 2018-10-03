@@ -4,6 +4,7 @@
 #include "Window.h"
 #include "Input.h"
 #include "Renderer.h"
+#include "Textures.h"
 
 #include "Pieces.h"
 #include "Board.h"
@@ -21,7 +22,7 @@ Scene::~Scene()
 {
 }
 
-void Scene::Init(Window* w, Renderer* r)
+void Scene::Init(Window* w, Renderer* r, Textures* t)
 {
 	pieces = new Pieces();
 	board = new Board(pieces, w->GetHeight());

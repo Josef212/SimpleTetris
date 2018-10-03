@@ -103,6 +103,35 @@ void Renderer::DrawCircle(int x, int y, int radius, SDL_Color & color, bool useC
 	SDL_RenderDrawPoints(renderer, points, 360);
 }
 
+void Renderer::Blit(SDL_Texture * texture, int x, int y, SDL_Rect * section, double angle, int pivotX, int pivotY)
+{
+	SDL_Rect r;
+	r.x = (int)(camera.x + x);
+	r.y = (int)(camera.y + y);
+
+	if (section)
+	{
+		r.w = section->w;
+		r.h = section->h;
+	}
+	else
+	{
+		SDL_QueryTexture(texture, NULL, NULL, &r.w, &r.h);
+	}
+
+	SDL_Point* p = NULL;
+	SDL_Point piv;
+
+	if (pivotX != INT_MAX && pivotY != INT_MAX)
+	{
+		piv.x = pivotX;
+		piv.y = pivotY;
+		p = &piv;
+	}
+
+	SDL_RenderCopyEx(renderer, texture, section, &r, angle, p, SDL_FLIP_NONE);
+}
+
 void Renderer::SetViewport(SDL_Rect r)
 {
 	SDL_RenderSetViewport(renderer, &r);

@@ -7,6 +7,8 @@
 
 class Renderer;
 
+struct SDL_Texture;
+
 #define WAIT_TIME 700		// Ms that the piece remains before movinf one block down
 
 class Game
@@ -20,6 +22,8 @@ public:
 
 	int posX, posY;			// Position of the piece it's falling
 	int piece, rotation;	// Kind and rotation of the piece that is falling
+
+	SDL_Texture* pieceSprite = nullptr;
 
 private:
 	int screenHeight;

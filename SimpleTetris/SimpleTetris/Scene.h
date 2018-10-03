@@ -4,6 +4,7 @@
 class Renderer;
 class Input;
 class Window;
+class Textures;
 class Pieces;
 class Board;
 class Game;
@@ -14,7 +15,7 @@ public:
 	Scene();
 	virtual ~Scene();
 
-	void Init(Window* w, Renderer* r);
+	void Init(Window* w, Renderer* r, Textures* t);
 	void CleanUp();
 
 	void BeginFrame(Window* w, Input* i);
