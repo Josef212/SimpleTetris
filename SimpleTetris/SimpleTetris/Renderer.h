@@ -37,6 +37,8 @@ public:
 	SDL_Color GetBackground()const { return background; }
 	void SetBackground(SDL_Color b) { background = b; }
 
+	SDL_Renderer* GetRenderer()const { return renderer; }
+
 
 public:
 	SDL_Rect camera;
