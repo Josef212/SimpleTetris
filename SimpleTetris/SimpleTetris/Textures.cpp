@@ -3,6 +3,7 @@
 #include "Renderer.h"
 
 #include <SDL_image.h>
+#include <iostream>
 
 
 Textures::Textures()
@@ -19,16 +20,15 @@ void Textures::Init()
 	int ret = IMG_Init(IMG_INIT_PNG);
 	if (ret & IMG_INIT_PNG != IMG_INIT_PNG)
 	{
-		// TODO: ERROR
+		std::cout << "Could not init SDL_image. ERROR: " << SDL_GetError() << std::endl;
 	}
 }
 
 void Textures::CleanUp()
 {
-	for (auto it = textures.begin(); it != textures.end();)
+	for (auto it : textures)
 	{
-		UnloadTexture(*it);
-		it = textures.erase(it);
+		UnloadTexture(it, false);
 	}
 
 	IMG_Quit();
@@ -45,6 +45,10 @@ SDL_Texture * Textures::LoadTexture(std::string path, Renderer* renderer)
 		ret = LoadTextureFromSurface(surface, renderer);
 
 		SDL_FreeSurface(surface);
+	}
+	else
+	{
+		std::cout << "Could not load texture [" << path << "]. ERROR: " << SDL_GetError() << std::endl;
 	}
 
 	return ret;
@@ -66,13 +70,13 @@ SDL_Texture * Textures::LoadTextureFromSurface(SDL_Surface * surface, Renderer* 
 	return ret;
 }
 
-bool Textures::UnloadTexture(SDL_Texture * texture)
+bool Textures::UnloadTexture(SDL_Texture * texture, bool eraseFromList)
 {
 	auto it = std::find(textures.begin(), textures.end(), texture);
 
 	if (it != textures.end())
 	{
-		textures.erase(it);
+		if(eraseFromList) textures.erase(it);
 		SDL_DestroyTexture(texture);
 		return true;
 	}

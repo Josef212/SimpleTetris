@@ -25,6 +25,8 @@ public:
 
 	SDL_Texture* pieceSprite = nullptr;
 
+	bool debug = false;
+
 private:
 	int screenHeight;
 	int nextPosX, nextPosY;

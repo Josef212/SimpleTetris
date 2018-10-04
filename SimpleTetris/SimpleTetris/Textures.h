@@ -22,7 +22,7 @@ public:
 
 private:
 	SDL_Texture* LoadTextureFromSurface(SDL_Surface* surface, Renderer* renderer);
-	bool UnloadTexture(SDL_Texture* texture);
+	bool UnloadTexture(SDL_Texture* texture, bool eraseFromList = true);
 
 private:
 	std::list<SDL_Texture*> textures;

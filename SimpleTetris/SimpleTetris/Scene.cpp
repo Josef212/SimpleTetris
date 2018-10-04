@@ -28,6 +28,8 @@ void Scene::Init(Window* w, Renderer* r, Textures* t)
 	board = new Board(pieces, w->GetHeight());
 	game = new Game(board, pieces, w->GetHeight(), r);
 
+	game->pieceSprite = t->LoadTexture("Tetris_piece.png", r);
+
 	time1 = SDL_GetTicks();
 }
 

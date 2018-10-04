@@ -72,9 +72,16 @@ void Game::DrawPiece(int x, int y, int piece, int rot)
 
 			if (pieces->GetBlockType(piece, rot, j, i) != 0)
 			{
-				renderer->DrawRect({ pixelX + i * BLOCK_SIZE, pixelY + j * BLOCK_SIZE,
-					BLOCK_SIZE, BLOCK_SIZE },
-					color);
+				if (debug)
+				{
+					renderer->DrawRect({ pixelX + i * BLOCK_SIZE, pixelY + j * BLOCK_SIZE,
+					   BLOCK_SIZE, BLOCK_SIZE },
+						color);
+				}
+				else
+				{
+					renderer->Blit(pieceSprite, pixelX + i * BLOCK_SIZE, pixelY + j * BLOCK_SIZE);
+				}
 			}
 		}
 	}
