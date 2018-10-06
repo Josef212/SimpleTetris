@@ -22,8 +22,9 @@ public:
 
 	int posX, posY;			// Position of the piece it's falling
 	int piece, rotation;	// Kind and rotation of the piece that is falling
+	Colors pieceColor;
 
-	SDL_Texture* pieceSprite = nullptr;
+	SDL_Texture* sprites[MAX_COL];
 
 	bool debug = false;
 
@@ -31,6 +32,7 @@ private:
 	int screenHeight;
 	int nextPosX, nextPosY;
 	int nextPiece, nextRotation;
+	Colors nextColor;
 
 	Board* board;
 	Pieces* pieces;
@@ -38,7 +40,7 @@ private:
 
 	int GetRand(int a, int b);
 	void InitGame();
-	void DrawPiece(int x, int y, int piece, int rot);
+	void DrawPiece(int x, int y, int piece, int rot, Colors color);
 	void DrawBoard();
 
 };

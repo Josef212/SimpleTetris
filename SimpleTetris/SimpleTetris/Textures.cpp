@@ -42,7 +42,7 @@ SDL_Texture * Textures::LoadTexture(std::string path, Renderer* renderer)
 
 	if (surface)
 	{
-		ret = LoadTextureFromSurface(surface, renderer);
+		ret = CreateTextureFromSurface(surface, renderer);
 
 		SDL_FreeSurface(surface);
 	}
@@ -59,7 +59,7 @@ void Textures::GetSize(SDL_Texture * texture, int & w, int & h)
 	SDL_QueryTexture(texture, NULL, NULL, &w, &h);
 }
 
-SDL_Texture * Textures::LoadTextureFromSurface(SDL_Surface * surface, Renderer* renderer)
+SDL_Texture * Textures::CreateTextureFromSurface(SDL_Surface * surface, Renderer* renderer)
 {
 	SDL_Texture* ret = nullptr;
 

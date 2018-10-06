@@ -52,14 +52,14 @@ bool Board::IsPossibleMovement(int x, int y, int piece, int rotation)
 	return true;
 }
 
-void Board::StorePiece(int x, int y, int piece, int rotation)
+void Board::StorePiece(int x, int y, int piece, int rotation, Colors color)
 {
 	for (int i1 = x, i2 = 0; i1 < x + PIECE_BLOCKS; ++i1, ++i2)
 	{
 		for (int j1 = y, j2 = 0; j1 < y + PIECE_BLOCKS; ++j1, ++j2)
 		{
 			if (pieces->GetBlockType(piece, rotation, j2, i2) != 0)
-				board[i1][j1] = POS_FILLED;
+				board[i1][j1] = (color > 0 && color < MAX_COL ? color : POS_FILLED);
 		}
 	}
 }
@@ -71,7 +71,7 @@ void Board::DeletePossibleLines()
 		int i = 0; 
 		while (i < BOARD_WIDTH)
 		{
-			if (board[i][j] != POS_FILLED) break;
+			if (board[i][j] == POS_FREE) break;
 			++i;
 		}
 
@@ -83,10 +83,17 @@ bool Board::IsGameOver()
 {
 	for (int i = 0; i < BOARD_WIDTH; ++i)
 	{
-		if (board[i][0] == POS_FILLED) return true;
+		if (board[i][0] != POS_FREE) return true;
 	}
 
 	return false;
+}
+
+int Board::GetBoardValue(int x, int y)
+{
+	if (x >= 0 && x < BOARD_WIDTH && y >= 0 && y < BOARD_HEIGHT)
+		return board[x][y];
+	return 0;
 }
 
 void Board::InitBoard()

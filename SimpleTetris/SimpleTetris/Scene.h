@@ -22,6 +22,9 @@ public:
 	void Draw();
 
 private:
+	void LoadSprites(Renderer* r, Textures* t);
+
+private:
 
 	Pieces* pieces;
 	Board* board;

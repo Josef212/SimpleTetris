@@ -2,11 +2,14 @@
 
 #include "Renderer.h"
 #include <cstdlib>
+#include <cstring>
+#include <iostream>
 
 
 Game::Game(Board* board, Pieces* pieces, int screenHeight, Renderer* renderer) : board(board), pieces(pieces), 
 																screenHeight(screenHeight), renderer(renderer)
 {
+	memset(&sprites, 0, MAX_COL);
 	InitGame();
 }
 
@@ -18,8 +21,18 @@ Game::~Game()
 void Game::DrawScene()
 {
 	DrawBoard();
-	DrawPiece(posX, posY, piece, rotation);
-	DrawPiece(nextPosX, nextPosY, nextPiece, nextRotation);
+	DrawPiece(posX, posY, piece, rotation, pieceColor);
+	DrawPiece(nextPosX, nextPosY, nextPiece, nextRotation, nextColor);
+
+	if(debug)
+	{
+		SDL_Rect r = { 0, 0, 16, 16 };
+		for (int i = 0; i < MAX_COL; ++i)
+		{
+			renderer->Blit(sprites[i], r.x, r.y);
+			r.x += r.w;
+		}
+	}
 }
 
 void Game::CreateNewPiece()
@@ -28,9 +41,11 @@ void Game::CreateNewPiece()
 	rotation = nextRotation;
 	posX = (BOARD_WIDTH / 2) + pieces->GetXInitialPos(piece, rotation);
 	posY = pieces->GetYInitialPos(piece, rotation);
+	pieceColor = nextColor;
 
 	nextPiece = GetRand(0, 6);
 	nextRotation = GetRand(0, 3);
+	nextColor = (Colors)GetRand(1, MAX_COL - 1);
 }
 
 int Game::GetRand(int a, int b)
@@ -46,16 +61,19 @@ void Game::InitGame()
 	rotation = GetRand(0, 3);
 	posX = (BOARD_WIDTH / 2) + pieces->GetXInitialPos(piece, rotation);
 	posY = pieces->GetYInitialPos(piece, rotation);
+	pieceColor = (Colors)GetRand(1, MAX_COL - 1);
 
 	nextPiece = GetRand(0, 6);
 	nextRotation = GetRand(0, 3);
 	nextPosX = BOARD_WIDTH + 5;
 	nextPosY = 5;
+	nextColor = (Colors)GetRand(1, MAX_COL - 1);
 }
 
-void Game::DrawPiece(int x, int y, int piece, int rot)
+void Game::DrawPiece(int x, int y, int piece, int rot, Colors color)
 {
-	SDL_Color color;
+	SDL_Color _color;
+	SDL_Texture* texture = nullptr;
 
 	int pixelX = board->GetXPosInPixels(x);
 	int pixelY = board->GetYPosInPixels(y);
@@ -64,11 +82,21 @@ void Game::DrawPiece(int x, int y, int piece, int rot)
 	{
 		for (int j = 0; j < PIECE_BLOCKS; ++j)
 		{
-			switch (pieces->GetBlockType(piece, rot, j, i))
+			if (debug)
 			{
-				case 1: color = green; break;
-				case 2: color = blue; break;
+				switch (pieces->GetBlockType(piece, rot, j, i))
+				{
+				case 1: _color = green; break;
+				case 2: _color = blue; break;
+				}
+
+				//_color = colors[color];
 			}
+			else
+			{
+				texture = sprites[color];
+			}
+			
 
 			if (pieces->GetBlockType(piece, rot, j, i) != 0)
 			{
@@ -76,11 +104,11 @@ void Game::DrawPiece(int x, int y, int piece, int rot)
 				{
 					renderer->DrawRect({ pixelX + i * BLOCK_SIZE, pixelY + j * BLOCK_SIZE,
 					   BLOCK_SIZE, BLOCK_SIZE },
-						color);
+						_color);
 				}
 				else
 				{
-					renderer->Blit(pieceSprite, pixelX + i * BLOCK_SIZE, pixelY + j * BLOCK_SIZE);
+					renderer->Blit(texture, pixelX + i * BLOCK_SIZE, pixelY + j * BLOCK_SIZE);
 				}
 			}
 		}
@@ -108,9 +136,18 @@ void Game::DrawBoard()
 		{
 			if (!board->IsFreeBlock(i, j))
 			{
-				renderer->DrawRect({ mX1 + i * BLOCK_SIZE, mY + j * BLOCK_SIZE,
-									BLOCK_SIZE, BLOCK_SIZE },
-									red);
+				if(debug)
+				{
+					SDL_Color col = colors[board->GetBoardValue(i, j)];
+					renderer->DrawRect({ mX1 + i * BLOCK_SIZE, mY + j * BLOCK_SIZE,
+						BLOCK_SIZE, BLOCK_SIZE },
+						col);
+				}
+				else
+				{
+					renderer->Blit(sprites[board->GetBoardValue(i, j)], mX1 + i * BLOCK_SIZE, mY + j * BLOCK_SIZE);
+				}
+				
 			}
 		}
 	}

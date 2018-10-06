@@ -3,6 +3,7 @@
 
 #include <string>
 #include <list>
+#include <SDL.h>
 
 struct SDL_Texture;
 struct SDL_Surface;
@@ -18,10 +19,10 @@ public:
 	void CleanUp();
 
 	SDL_Texture* LoadTexture(std::string path, Renderer* renderer);
+	SDL_Texture* CreateTextureFromSurface(SDL_Surface* surface, Renderer* renderer);
 	void GetSize(SDL_Texture* texture, int& w, int& h);
 
 private:
-	SDL_Texture* LoadTextureFromSurface(SDL_Surface* surface, Renderer* renderer);
 	bool UnloadTexture(SDL_Texture* texture, bool eraseFromList = true);
 
 private:

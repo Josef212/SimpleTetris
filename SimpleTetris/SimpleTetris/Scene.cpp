@@ -28,7 +28,7 @@ void Scene::Init(Window* w, Renderer* r, Textures* t)
 	board = new Board(pieces, w->GetHeight());
 	game = new Game(board, pieces, w->GetHeight(), r);
 
-	game->pieceSprite = t->LoadTexture("Tetris_piece.png", r);
+	LoadSprites(r, t);
 
 	time1 = SDL_GetTicks();
 }
@@ -67,7 +67,7 @@ void Scene::BeginFrame(Window* w, Input* i)
 			game->posY++;
 		}
 
-		board->StorePiece(game->posX, game->posY - 1, game->piece, game->rotation);
+		board->StorePiece(game->posX, game->posY - 1, game->piece, game->rotation, game->pieceColor);
 		board->DeletePossibleLines();
 
 		if (board->IsGameOver())
@@ -86,6 +86,11 @@ void Scene::BeginFrame(Window* w, Input* i)
 			game->rotation = (game->rotation + 1) % 4;
 	}
 
+	if(i->GetKeyDown(SDL_SCANCODE_F1))
+	{
+		game->debug = !game->debug;
+	}
+
 	if (SDL_GetTicks() - time1 > WAIT_TIME)
 	{
 		if (board->IsPossibleMovement(game->posX, game->posY + 1, game->piece, game->rotation))
@@ -94,7 +99,7 @@ void Scene::BeginFrame(Window* w, Input* i)
 		}
 		else
 		{
-			board->StorePiece(game->posX, game->posY, game->piece, game->rotation);
+			board->StorePiece(game->posX, game->posY, game->piece, game->rotation, game->pieceColor);
 
 			board->DeletePossibleLines();
 
@@ -115,4 +120,15 @@ void Scene::BeginFrame(Window* w, Input* i)
 void Scene::Draw()
 {
 	game->DrawScene();
+}
+
+void Scene::LoadSprites(Renderer* r, Textures* t)
+{
+	for(int i = 0; i < MAX_COL; ++i)
+	{
+		std::string path = "Sprites/Tetris_piece" + std::to_string(i) + ".png";
+		SDL_Texture* tex = t->LoadTexture(path, r);
+		game->sprites[i] = tex;
+	}
+
 }

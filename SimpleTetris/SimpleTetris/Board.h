@@ -2,6 +2,7 @@
 #define __BOARD_H__
 
 #include "Pieces.h"
+#include "Colors.h"
 
 #define BOARD_LINE_WIDTH 6			// Width of the lines that delimit the board
 #define BLOCK_SIZE 16				// Width & Height of each block of a piece
@@ -22,9 +23,11 @@ public:
 	int GetYPosInPixels(int pos);
 	bool IsFreeBlock(int x, int y);
 	bool IsPossibleMovement(int x, int y, int piece, int rotation);
-	void StorePiece(int x, int y, int piece, int rotation);
+	void StorePiece(int x, int y, int piece, int rotation, Colors color);
 	void DeletePossibleLines();
 	bool IsGameOver();
+
+	int GetBoardValue(int x, int y);
 
 private:
 	enum {POS_FREE, POS_FILLED};

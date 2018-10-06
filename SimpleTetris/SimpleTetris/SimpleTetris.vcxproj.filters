@@ -40,7 +40,9 @@
     <ClCompile Include="Game.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
-    <ClCompile Include="Textures.cpp" />
+    <ClCompile Include="Textures.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -67,6 +69,11 @@
     <ClInclude Include="PiecesInfo.h">
       <Filter>Helpers</Filter>
     </ClInclude>
-    <ClInclude Include="Textures.h" />
+    <ClInclude Include="Textures.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Colors.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
