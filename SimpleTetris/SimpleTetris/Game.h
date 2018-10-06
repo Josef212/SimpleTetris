@@ -42,6 +42,7 @@ private:
 	void InitGame();
 	void DrawPiece(int x, int y, int piece, int rot, Colors color);
 	void DrawBoard();
+	void DrawColsLines();
 
 };
 

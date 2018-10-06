@@ -20,6 +20,7 @@ Game::~Game()
 
 void Game::DrawScene()
 {
+	DrawColsLines();
 	DrawBoard();
 	DrawPiece(posX, posY, piece, rotation, pieceColor);
 	DrawPiece(nextPosX, nextPosY, nextPiece, nextRotation, nextColor);
@@ -150,5 +151,25 @@ void Game::DrawBoard()
 				
 			}
 		}
+	}
+}
+
+void Game::DrawColsLines()
+{
+	SDL_Color color = white;
+	color.a = 160;
+
+	int mX1 = BOARD_POSITION - (BLOCK_SIZE * (BOARD_WIDTH / 2)) - 1;
+	int boardPixelsHeight = BLOCK_SIZE * BOARD_HEIGHT;
+
+	for(int c = 1; c < BOARD_WIDTH; ++c)
+	{
+		int x0 = mX1 + c * BLOCK_SIZE;
+		int y0 = screenHeight - boardPixelsHeight;
+
+		int x1 = x0;
+		int y1 = screenHeight;
+
+		renderer->DrawLine(x0, y0, x1, y1, color, false);
 	}
 }
