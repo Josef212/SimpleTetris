@@ -74,7 +74,6 @@ void Game::InitGame()
 void Game::DrawPiece(int x, int y, int piece, int rot, Colors color)
 {
 	SDL_Color _color;
-	SDL_Texture* texture = nullptr;
 
 	int pixelX = board->GetXPosInPixels(x);
 	int pixelY = board->GetYPosInPixels(y);
@@ -82,34 +81,26 @@ void Game::DrawPiece(int x, int y, int piece, int rot, Colors color)
 	for (int i = 0; i < PIECE_BLOCKS; ++i)
 	{
 		for (int j = 0; j < PIECE_BLOCKS; ++j)
-		{
-			if (debug)
-			{
-				switch (pieces->GetBlockType(piece, rot, j, i))
-				{
-				case 1: _color = green; break;
-				case 2: _color = blue; break;
-				}
-
-				//_color = colors[color];
-			}
-			else
-			{
-				texture = sprites[color];
-			}
-			
-
+		{	
 			if (pieces->GetBlockType(piece, rot, j, i) != 0)
 			{
 				if (debug)
 				{
+					switch (pieces->GetBlockType(piece, rot, j, i))
+					{
+					case 1: _color = green; break;
+					case 2: _color = blue; break;
+					}
+
+					//_color = colors[color];
+
 					renderer->DrawRect({ pixelX + i * BLOCK_SIZE, pixelY + j * BLOCK_SIZE,
 					   BLOCK_SIZE, BLOCK_SIZE },
 						_color);
 				}
 				else
 				{
-					renderer->Blit(texture, pixelX + i * BLOCK_SIZE, pixelY + j * BLOCK_SIZE);
+					renderer->Blit(sprites[color], pixelX + i * BLOCK_SIZE, pixelY + j * BLOCK_SIZE);
 				}
 			}
 		}
